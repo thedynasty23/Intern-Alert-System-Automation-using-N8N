@@ -1,0 +1,132 @@
+{
+  "name": "Project",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "title ",
+              "cssSelector": "h3.job-internship-name a.job-title-href",
+              "returnArray": true
+            },
+            {
+              "key": "company",
+              "cssSelector": ".company-name",
+              "returnArray": true
+            },
+            {
+              "key": "location",
+              "cssSelector": ".row-1-item.locations a",
+              "returnArray": true
+            },
+            {
+              "key": "duration",
+              "cssSelector": ".row-1-item:nth-of-type(3) span",
+              "returnArray": true
+            },
+            {
+              "key": "stipend",
+              "cssSelector": ".stipend",
+              "returnArray": true
+            },
+            {
+              "key": "apply_by",
+              "cssSelector": ".status-success span",
+              "returnArray": true
+            },
+            {
+              "key": "link",
+              "cssSelector": ".individual_internship",
+              "returnValue": "attribute",
+              "attribute": "data-href",
+              "returnArray": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        -16
+      ],
+      "id": "54beb866-2d97-4881-b274-023bf78197db",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "url": "https://internshala.com/internships/machine-learning-internship",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -208,
+        -16
+      ],
+      "id": "ed1ff678-22c9-4f66-9834-80de2dcaf3da",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -416,
+        -16
+      ],
+      "id": "78a075f1-5669-4e4e-9e04-9d5f2ea39f35",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Kolkata",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "11364c5f-1073-4ed3-b01c-b27c4518deda",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "73b22cde4cd377739ec2a9fe2d5298f88051c0dbcc5d98a00ea5a776459b0ee5"
+  },
+  "id": "bdIzwCsydr4FGlSW",
+  "tags": []
+}
